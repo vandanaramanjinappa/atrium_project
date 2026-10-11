@@ -1,0 +1,48 @@
+<%- include('../partials/head', { title: 'Directory' }) %>
+<%- include('../partials/nav', { active: 'directory', currentUser: currentUser }) %>
+<main id="main-content" class="page-shell">
+  <section class="page-heading split-heading">
+    <div>
+      <p class="eyebrow">People and teams</p>
+      <h1>Staff directory</h1>
+      <p class="hero-copy"><%= colleagues.length %> <%= colleagues.length === 1 ? 'colleague' : 'colleagues' %> shown across Atrium.</p>
+    </div>
+    <form class="search-form" method="get" action="/directory">
+      <label for="directory-search">Search by name or department</label>
+      <div class="search-control">
+        <input type="text" id="directory-search" name="q" value="<%= q %>" placeholder="Name or department">
+        <button class="button button-primary" type="submit">Search</button>
+      </div>
+    </form>
+  </section>
+
+  <% if (q) { %>
+    <p class="result-summary">Showing colleagues matching <strong><%- q %></strong>.</p>
+  <% } %>
+
+  <% if (colleagues.length === 0) { %>
+    <section class="empty-state">
+      <span class="empty-number">00</span>
+      <div><h2>No colleagues found</h2><p>Try a different name or department.</p></div>
+    </section>
+  <% } else { %>
+    <div class="directory-table table-wrap">
+      <table>
+        <thead><tr><th scope="col">Name</th><th scope="col">Department</th><th scope="col">Email</th><th scope="col">Role</th></tr></thead>
+        <tbody>
+          <% colleagues.forEach(function (person) { %>
+            <tr>
+              <td data-label="Name">
+                <div class="person-cell"><span class="avatar avatar-light" aria-hidden="true"><%= person.display_name.split(' ').map(function (part) { return part.charAt(0); }).join('').slice(0, 2) %></span><a href="/directory?q=<%= encodeURIComponent(person.display_name) %>"><%= person.display_name %></a></div>
+              </td>
+              <td data-label="Department"><%= person.department %></td>
+              <td data-label="Email"><a class="quiet-link" href="mailto:<%= person.email %>"><%= person.email %></a></td>
+              <td data-label="Role"><span class="tag"><%= person.role %></span></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</main>
+<%- include('../partials/foot') %>
