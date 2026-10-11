@@ -25,7 +25,6 @@ understand it.
 | Passwords (Login page) | If someone can see the passwords, they can log in as anyone, even the admin. |
 |Staff contact details (Directory page) |Someone who left the company can still see every staff member's email and send them fake emails.|
 | Passwords (Login page) | If someone can see the passwords, they can log in as anyone, even the admin. |
-|Staff Profile page | If the data of the staffs get leak it damages the privacy and trust of the staff.|
 |Shared documents (Documents page)| The wrong person could read supplier details or change the budget form.|
 
 
