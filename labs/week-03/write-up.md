@@ -85,3 +85,7 @@ The thing you noted in section 2, that you had not verified at the time.
 The other two findings matched the same rule. Why are they not the same situation?
 Two sentences.
 The other two findings use the same Semgrep rule, but their SQL queries use ? placeholders for values. The directory search adds the search text directly into the query, so it needs a different assessment.
+
+## Semgrep rule experiment
+
+I removed insert from the regular expression in scan-rules/sql.yaml and ran the scan again. The original scan reported 3 findings, but after removing insert, it reported 2 findings. The finding in src/db/reset.js disappeared, while the directory and resources findings remained. This showed me that changing a scanner rule can change the results it reports. It did not fix the application code.
